@@ -29,7 +29,9 @@ export class Back {
     this.pool.length = 0;
     for (var name in this.servers) {
       var server = this.servers[name];
-      if (server.isHealthy()) this.pool.push(server);
+      server.isHealthy()
+        .then(() => { this.pool.push(server) })
+        .catch( () => {});
     }
   }
 

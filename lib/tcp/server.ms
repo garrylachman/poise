@@ -8,7 +8,7 @@ export class Server {
 
   function parseOptions(options) {
     if (typeof options == 'string') {
-      var splitted = options.split(':'); 
+      var splitted = options.split(':');
       return { host: splitted[0], port: parseInt(splitted[1]) };
     }
     return options;
@@ -16,15 +16,33 @@ export class Server {
 
   function handle(socket) {
     this.connections++;
-    var conn = net.connect(this.conOpts, #{ 
+    var conn = net.connect(this.conOpts, #{
       conn.pipe(socket);
       socket.pipe(conn);
-    }); 
+    });
 
     conn.on('end', #{ self.connections-- });
   }
 
   function isHealthy() {
-    return true;
+    return new Promise( (resolve, reject) => {
+      let client = new net.Socket();
+      client.once('connect', () => {
+          client.end();
+          client.destroy();
+          resolve();
+      });
+      client.once('error', (err) => {
+          client.end();
+          client.destroy();
+          reject();
+      });
+      client.setTimeout(5*1000, () => {
+          client.end();
+          client.destroy();
+          reject();
+      });
+      client.connect({port: this.conOpts.port, host: this.conOpts.host});
+    });
   }
 }
