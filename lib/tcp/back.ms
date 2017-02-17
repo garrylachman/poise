@@ -26,12 +26,15 @@ export class Back {
   }
 
   function rebalance() {
+    var _this = this;
     this.pool.length = 0;
     for (var name in this.servers) {
       var server = this.servers[name];
       server.isHealthy()
-        .then(() => { this.pool.push(server) })
-        .catch( () => {});
+        .then( function(srv) {
+          _this.pool.push(srv);
+        })
+        .catch( function(err) { });
     }
   }
 

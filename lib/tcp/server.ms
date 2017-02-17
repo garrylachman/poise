@@ -25,24 +25,25 @@ export class Server {
   }
 
   function isHealthy() {
-    return new Promise( (resolve, reject) => {
-      let client = new net.Socket();
-      client.once('connect', () => {
+    var _this = this;
+    return new Promise( function(resolve, reject) {
+      var client = new net.Socket();
+      client.once('connect', function() {
           client.end();
           client.destroy();
-          resolve();
+          resolve(_this);
       });
-      client.once('error', (err) => {
-          client.end();
-          client.destroy();
-          reject();
-      });
-      client.setTimeout(5*1000, () => {
+      client.once('error', function(err) {
           client.end();
           client.destroy();
           reject();
       });
-      client.connect({port: this.conOpts.port, host: this.conOpts.host});
+      client.setTimeout(5*1000, function() {
+          client.end();
+          client.destroy();
+          reject();
+      });
+      client.connect({port: _this.conOpts.port, host: _this.conOpts.host});
     });
   }
 }
