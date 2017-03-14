@@ -1,33 +1,33 @@
 {
-  "name": "poise",
-  "version": "0.0.2",
-  "description": "An HAProxy clone written in node for more flexibility and embedding into a node process.",
-  "main": "lib/index.js",
+	"name": "poise",
+	"version": "0.0.3",
+	"description": "An HAProxy clone written in node for more flexibility and embedding into a node process.",
+	"main": "lib/index.js",
 
-  "dependencies": {
-    "mochiscript":   "~0.6.15",
-    "upbeat-health": "~0.0.3"
-  },
+	"dependencies": {
+		"mochiscript": "~0.6.15",
+		"upbeat-health": "~0.0.3"
+	},
 
-  "devDependencies": {
-    "nodeunit": "0.7.4",
-    "request":  "*"
-  },
+	"devDependencies": {
+		"nodeunit": "0.7.4",
+		"request": "*"
+	},
 
-  "scripts": {
-    "test": "node tests"
-  },
+	"scripts": {
+		"test": "node tests"
+	},
 
-  "keywords": [
-    "haproxy",
-    "load",
-    "balancer",
-    "scalability",
-    "http",
-    "haproxy",
-    "tcp"
-  ],
+	"keywords": [
+		"haproxy",
+		"load",
+		"balancer",
+		"scalability",
+		"http",
+		"haproxy",
+		"tcp"
+	],
 
-  "author": "Jeff Su",
-  "license": "BSD"
+	"author": "Jeff Su",
+	"license": "BSD"
 }
